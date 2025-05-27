@@ -4,13 +4,12 @@
 INSTALL_DIR="/usr/local/bin"
 TOOL_NAME="k8sec"
 CONFIG_DIR="$HOME/.k8sec"
-GITHUB_RAW_URL="https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/"
 
 sudo mkdir -p "$INSTALL_DIR"
 mkdir -p "$CONFIG_DIR"
 
 echo "Downloading k8sec script..."
-sudo curl -s "$GITHUB_RAW_URL/k8sec.sh" -o "$INSTALL_DIR/$TOOL_NAME"
+sudo curl -s "https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/k8sec.sh" -o "$INSTALL_DIR/k8sec"
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download the script. Please check your internet connection and the URL."

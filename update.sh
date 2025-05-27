@@ -1,7 +1,13 @@
 #!/bin/bash
 
+INSTALL_DIR="/usr/local/bin"
 # Remove the existing installation
-sudo rm -f /usr/local/bin/k8s-secret
+sudo rm -f /usr/local/bin/k8sec
 
 # Download and run the installation script
-curl -s https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/install.sh | bash -s --
+sudo curl -s "https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/k8sec.sh" -o "$INSTALL_DIR/k8sec"
+
+# Make the script executable
+sudo chmod +x "$INSTALL_DIR/k8sec"
+
+echo "k8sec has been updated successfully!"
