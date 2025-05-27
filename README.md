@@ -1,15 +1,15 @@
-# k8s-secret
+# kube-secret
 
 A tool to fetch secrets from a Kubernetes cluster.
 
 ## Installation
 
 ```bash
-curl https://raw.githubusercontent.com/noxhsxrk/k8s-secret/main/install.sh | bash && rm -f install.sh
+curl https://raw.githubusercontent.com/noxhsxrk/kube-secret/refs/heads/main/install.sh | bash && rm -f install.sh
 ```
 
 ## Update
 
 ```bash
-curl https://raw.githubusercontent.com/noxhsxrk/k8s-secret/main/update.sh | bash && rm -f update.sh
+curl https://raw.githubusercontent.com/noxhsxrk/kube-secret/refs/heads/main/update.sh | bash && rm -f update.sh
 ```
