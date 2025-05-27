@@ -9,8 +9,8 @@ GITHUB_RAW_URL="https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/"
 sudo mkdir -p "$INSTALL_DIR"
 mkdir -p "$CONFIG_DIR"
 
-echo "Downloading k8s-secret script..."
-sudo curl -s "$GITHUB_RAW_URL/k8s-secret.sh" -o "$INSTALL_DIR/$TOOL_NAME"
+echo "Downloading k8sec script..."
+sudo curl -s "$GITHUB_RAW_URL/k8sec.sh" -o "$INSTALL_DIR/$TOOL_NAME"
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download the script. Please check your internet connection and the URL."
