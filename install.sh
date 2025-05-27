@@ -4,7 +4,7 @@
 INSTALL_DIR="/usr/local/bin"
 TOOL_NAME="k8sec"
 CONFIG_DIR="$HOME/.k8sec"
-GITHUB_RAW_URL="https://raw.githubusercontent.com/noxhsxrk/kube-secret/refs/heads/main/"
+GITHUB_RAW_URL="https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/"
 
 sudo mkdir -p "$INSTALL_DIR"
 mkdir -p "$CONFIG_DIR"
