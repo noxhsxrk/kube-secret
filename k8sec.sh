@@ -12,6 +12,7 @@ fi
 
 CONFIG_DIR="$HOME/.k8sec"
 EXCLUDE_FILE="$CONFIG_DIR/exclude-namespaces.txt"
+SERVICES_JSON="$CONFIG_DIR/services.json"
 
 mkdir -p "$CONFIG_DIR"
 
@@ -158,8 +159,6 @@ fetch_secrets() {
     SERVICE_NAME=$1
     ENV_TYPE=${2:-"qa"}
     CONFIG_TYPE=${3:-"auto"}
-
-    SERVICES_JSON="$HOME/.k8s-secret/services.json"
 
     if [ ! -f "$SERVICES_JSON" ]; then
         echo "Error: services.json not found in $SERVICES_JSON"
