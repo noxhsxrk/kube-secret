@@ -4,4 +4,4 @@
 sudo rm -f /usr/local/bin/k8s-secret
 
 # Download and run the installation script
-curl -s https://raw.githubusercontent.com/noxhsxrk/kube-secret/refs/heads/main/install.sh | bash -s --
+curl -s https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/install.sh | bash -s --
