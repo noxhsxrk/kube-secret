@@ -93,66 +93,43 @@ should_exclude_namespace() {
 
 list_services() {
     echo "Generating services.json..."
-    if [ ! -f "$SERVICES_JSON" ]; then
-        echo "," >>"$SERVICES_JSON"
-    fi
 
-    cat >"$SERVICES_JSON" <<EOF
-{
-  "namespaces_and_services": [
-EOF
-
-    first_ns=true
+    namespaces_json=""
     for ns in $(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}' 2>/dev/null); do
         if should_exclude_namespace "$ns"; then
             echo "Skipping excluded namespace: $ns"
             continue
         fi
 
-        if [ "$first_ns" = true ]; then
-            first_ns=false
-        else
-            echo "," >>"$SERVICES_JSON"
-        fi
-
-        cat >>"$SERVICES_JSON" <<EOF
-    {
-      "namespace": "$ns",
-      "services": [
-EOF
-
-        first_svc=true
+        services_json=""
         svc_names=$(kubectl get services -n "$ns" -o jsonpath='{.items[*].metadata.name}' 2>/dev/null)
 
         for svc in $svc_names; do
-            if [ "$first_svc" = true ]; then
-                first_svc=false
-            else
-                echo "," >>"$SERVICES_JSON"
-            fi
-
             svc_type=$(kubectl get service "$svc" -n "$ns" -o jsonpath='{.spec.type}' 2>/dev/null || echo "Unknown")
             svc_cluster_ip=$(kubectl get service "$svc" -n "$ns" -o jsonpath='{.spec.clusterIP}' 2>/dev/null || echo "None")
 
-            cat >>"$SERVICES_JSON" <<EOF
-        {
-          "name": "$svc",
-          "type": "$svc_type",
-          "clusterIP": "$svc_cluster_ip"
-        }
-EOF
+            service_entry=$(jq -n --arg name "$svc" --arg type "$svc_type" --arg ip "$svc_cluster_ip" \
+                '{name: $name, type: $type, clusterIP: $ip}')
+
+            if [ -z "$services_json" ]; then
+                services_json="$service_entry"
+            else
+                services_json="$services_json, $service_entry"
+            fi
         done
 
-        cat >>"$SERVICES_JSON" <<EOF
-      ]
-    }
-EOF
+        namespace_entry=$(jq -n --arg ns "$ns" --argjson svcs "[$services_json]" \
+            '{namespace: $ns, services: $svcs}')
+
+        if [ -z "$namespaces_json" ]; then
+            namespaces_json="$namespace_entry"
+        else
+            namespaces_json="$namespaces_json, $namespace_entry"
+        fi
     done
 
-    cat >>"$SERVICES_JSON" <<EOF
-  ]
-}
-EOF
+    jq -n --argjson ns_svcs "[$namespaces_json]" \
+        '{namespaces_and_services: $ns_svcs}' >"$SERVICES_JSON"
 
     echo "services.json generated successfully at $SERVICES_JSON!"
 }
