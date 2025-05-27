@@ -16,7 +16,7 @@ EXCLUDE_FILE="$CONFIG_DIR/exclude-namespaces.txt"
 mkdir -p "$CONFIG_DIR"
 
 usage() {
-    echo "Usage: \$0 <command> [arguments]"
+    echo "Usage: $0 <command> [arguments]"
     echo ""
     echo "Commands:"
     echo "  <service-name> [env-type] [config-type]  - Fetch secrets for a service"
@@ -58,11 +58,11 @@ config() {
         exit 1
     fi
 
-    echo "Opening exclude namespaces configuration file with $(echo "$EDIT_CMD" | awk '{print \\$1}')..."
+    echo "Opening exclude namespaces configuration file with $(echo "$EDIT_CMD" | awk '{print $1}')..."
     $EDIT_CMD "$EXCLUDE_FILE"
 
     echo "Configuration updated successfully!"
-    echo "Run 'k8s-secret list-services' to refresh the services list with the new configuration."
+    echo "Run 'k8sec list-services' to refresh the services list with the new configuration."
 }
 
 should_exclude_namespace() {
