@@ -32,7 +32,6 @@ usage() {
 }
 
 config() {
-    echo "$EXCLUDE_FILE"
     if [ ! -f "$EXCLUDE_FILE" ]; then
         echo "# List of namespaces to exclude from the services list" >"$EXCLUDE_FILE"
         echo "# Use asterisk (*) for prefix matching (e.g., 'namespace-*' excludes all namespaces starting with 'namespace-')" >>"$EXCLUDE_FILE"
@@ -94,6 +93,9 @@ should_exclude_namespace() {
 
 list_services() {
     echo "Generating services.json..."
+    if [ ! -f "$SERVICES_JSON" ]; then
+        echo "," >>"$SERVICES_JSON"
+    fi
 
     cat >"$SERVICES_JSON" <<EOF
 {
