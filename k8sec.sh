@@ -287,6 +287,8 @@ fi
 
 if [ "$1" = "list-services" ]; then
     list_services
+elif [ "$1" = "config" ]; then
+    config
 else
     fetch_secrets "$@"
 fi
