@@ -5,11 +5,6 @@ if ! command -v kubectl &>/dev/null; then
     exit 1
 fi
 
-if ! kubectl get pods &>/dev/null; then
-    echo "Error: Not connected to a Kubernetes cluster"
-    exit 1
-fi
-
 CONFIG_DIR="$HOME/.k8sec"
 EXCLUDE_FILE="$CONFIG_DIR/exclude-namespaces.txt"
 SERVICES_JSON="$CONFIG_DIR/services.json"
