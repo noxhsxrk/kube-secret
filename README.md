@@ -13,3 +13,5 @@ curl -O https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/install.sh &
 ```bash
 curl -O https://raw.githubusercontent.com/noxhsxrk/kube-secret/main/update.sh | bash && rm -f update.sh
 ```
+
+ไม่ต้องอ่านเยอะ คนเร่นเขาลู้กัล
